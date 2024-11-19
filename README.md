@@ -1,18 +1,52 @@
-### mockMultiGlobalFetch Example
+## Jest-Vest
+Helper functions for mocking fetch in Jest
 
-Without `jest-vest`:
+### install
+
+`npm i jest-vest --save-dev`
+
+### Mocking multiple fetch Responses using mockMultiGlobalFetch:
+
+```typescript
+const mockSeeds: MockResponseSeed[] = [
+  {
+    url: "https://api.com/first",
+    response: { data: "first response" },
+  },
+  {
+    url: "https://api.com/second",
+    response: { data: "second response" },
+  },
+];
+
+beforeEach(() => {
+  mockMultiGlobalFetch(mockSeeds);
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+```
+
+### Mock all fetch responses with a single response using mockGlobalFetch:
+
+```typescript
+mockGlobalFetch(mockResponse);
+```
+
+### Mocking multiple fetch Responses without Jest-Vest:
 
 ```typescript
 beforeEach(() => {
   global.fetch = jest.fn((url: string): Promise<Response> => {
-    if (url === "https://api.first.com/data") {
+    if (url === "https://api.com/first") {
       return Promise.resolve(
         new Response(JSON.stringify({ data: "first response" }), {
           status: 200,
           statusText: "OK",
         }),
       );
-    } else if (url === "https://api.second.com/data") {
+    } else if (url === "https://api.com/second") {
       return Promise.resolve(
         new Response(JSON.stringify({ data: "second response" }), {
           status: 200,
@@ -30,32 +64,7 @@ afterAll(() => {
 });
 ```
 
-With `jest-vest`:
-
-```typescript
-const mockSeeds: MockResponseSeed[] = [
-  {
-    url: "https://api.first.com/data",
-    response: { data: "first response" },
-  },
-  {
-    url: "https://api.second.com/data",
-    response: { data: "second response" },
-  },
-];
-
-beforeEach(() => {
-  mockMultiGlobalFetch(mockSeeds);
-});
-
-afterAll(() => {
-  jest.restoreAllMocks();
-});
-```
-
-### mockGlobalFetch Example:
-
-Without `jest-vest`:
+### Mocking multiple fetch Responses without Jest-Vest:
 
 ```typescript
 global.fetch = jest.fn(() => {
@@ -64,10 +73,4 @@ global.fetch = jest.fn(() => {
     ok: true,
   });
 }) as jest.Mock;
-```
-
-With `jest-vest`:
-
-```typescript
-mockGlobalFetch(mockResponse);
 ```
