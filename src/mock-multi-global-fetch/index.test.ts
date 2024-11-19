@@ -24,7 +24,7 @@ describe("mockMultiGlobalFetch", () => {
   });
 
   it("should throw an error if no mock responses are provided", () => {
-    expect(() => mockMultiGlobalFetch([])).toThrowError(
+    expect(() => mockMultiGlobalFetch([])).toThrow(
       "No mock responses were provided to mockMultiGlobalFetch.",
     );
   });
