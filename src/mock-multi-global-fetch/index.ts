@@ -1,15 +1,13 @@
-export type MockResponseSeed<T> = {
+export type MockResponseSeed = {
   url: string;
-  response: T;
+  response: unknown; // Allows any shape but enforces explicit typing
 };
 
-/*
- ** This function will mock the global fetch object to return specific responses for given URLs.
- ** It throws an error if a response is not defined for a given URL.
+/**
+ * Mocks the global fetch object with predefined responses for given URLs.
+ * Throws an error if a response is not defined for a requested URL.
  */
-export const mockMultiGlobalFetch = <T>(
-  mockSeeds: MockResponseSeed<T>[],
-): void => {
+export const mockMultiGlobalFetch = (mockSeeds: MockResponseSeed[]): void => {
   if (!mockSeeds || mockSeeds.length === 0) {
     throw new Error("No mock responses were provided to mockMultiGlobalFetch.");
   }
