@@ -1,10 +1,11 @@
 {
   "name": "jest-vest",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
-    "dist",
+    "dist/mock-multi-global-fetch/index.js",
+    "dist/mock-global-fetch/index.js",
     "README.md",
     "LICENSE"
   ],

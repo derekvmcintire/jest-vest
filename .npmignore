@@ -3,6 +3,9 @@ node_modules/
 tests/
 *.log
 *.tsbuildinfo
+*.test.ts
+*.test.tsx
+
 
 # Optional: Exclude source files if not needed for consumers
 src/
