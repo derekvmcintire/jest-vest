@@ -1,7 +1,3 @@
-Here’s an example of comprehensive documentation for your library, **jest-vest**. It includes an introduction, installation guide, usage examples, and API references.
-
----
-
 # **jest-vest**
 
 A lightweight JavaScript library for mocking multiple `fetch` responses in Jest tests. Designed to simplify and modularize the process of returning different mock responses based on the requested URL.
