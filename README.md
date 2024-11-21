@@ -172,6 +172,51 @@ Testing React components that make multiple network requests can get messy with 
 
 ---
 
+## Mocking Multiple Requests Without Jest-Vest Vs. With Jest-Vest
+
+#### Without Jest-Vest:
+
+```typescript
+global.fetch = jest.fn((input) => {
+  let response = null;
+  if (input === https://api.example.com/user) {
+    response = { id: 1, name: "John Doe" };
+  } else if ( input === "https://api.example.com/posts) {
+    response = [{ id: 101, title: "Mocking with Jest" }]
+  }
+
+  if (!response) {
+    throw new Error(
+      `No mock response found for URL: ${input}.`,
+    );
+  }
+
+  return Promise.resolve({
+    json: () => Promise.resolve(response),
+    ok: true,
+  });
+}) as jest.Mock;
+```
+
+#### With Jest-Vest:
+
+```typescript
+  const mockResponses = [
+    {
+      url: "https://api.example.com/user",
+      response: { id: 1, name: "John Doe" },
+    },
+    {
+      url: "https://api.example.com/posts",
+      response: [{ id: 101, title: "Mocking with Jest" }],
+    },
+  ];
+
+  mockMultiGlobalFetch(mockResponses);
+```
+
+---
+
 ## **Contributing**
 
 Contributions are welcome! If you have ideas or improvements, please open an issue or submit a pull request on GitHub.
