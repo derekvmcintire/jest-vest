@@ -181,7 +181,7 @@ global.fetch = jest.fn((input) => {
   let response = null;
   if (input === "https://api.example.com/user") {
     response = { id: 1, name: "John Doe" };
-  } else if ( input === "https://api.example.com/posts) {
+  } else if ( input === "https://api.example.com/posts") {
     response = [{ id: 101, title: "Mocking with Jest" }]
   }
 
